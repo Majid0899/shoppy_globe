@@ -1,13 +1,12 @@
 import './App.css'
-
-import Header from './components/Header'
+import { Layout } from './components'
+import store from './redux/store'
+import {Provider} from 'react-redux'
 
 function App() {
   return (
     <>
-    App
-
-  
+    <Provider store={store} ><Layout /></Provider>
       
     </>
   )
