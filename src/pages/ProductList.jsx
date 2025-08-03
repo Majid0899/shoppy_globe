@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
 import useFetch from '../utils/useFetch';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../redux/cartSlice';
 import { Link } from 'react-router-dom';
 import {Spinner,ProductItem} from '../components';
+import { setSearchText,clearSearchText } from '../redux/searchSlice';
 
 const ProductList = () => {
 
   
-  const [SearchText, setSearchText] = useState("")
+  const SearchText=useSelector((state)=>state.search.query)
   const [filterItems, setfilterItems] = useState([]);
   const [Error, setError] = useState(null);
   const [finalProduct, setfinalProduct] = useState([])
@@ -24,7 +25,7 @@ const ProductList = () => {
   const handleBack = () => {
     setError(null)
     setfilterItems([])
-    setSearchText("")
+    dispatch(clearSearchText())
   }
   const handleSearch = () => {
 
@@ -37,7 +38,7 @@ const ProductList = () => {
       if (searchProduct.length > 0) {
         setfilterItems(searchProduct);
         setError(null)
-        setSearchText("")
+        dispatch(clearSearchText())
       } else {
         setfilterItems([])
         setError(`No product found with the name of ${SearchText}`)
@@ -69,7 +70,7 @@ const ProductList = () => {
             value={SearchText}
             placeholder="Search Products..."
             className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={(e) => dispatch(setSearchText(e.target.value))}
           />
           <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
             onClick={handleSearch}>
