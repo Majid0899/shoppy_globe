@@ -6,9 +6,13 @@ import Footer from './Footer'
 const Layout = () => {
   return (
     <>
-    <Header/>
-    <Outlet/>
-    <Footer />
+   <div className="flex flex-col min-h-screen">
+    <Header />
+      <main className="flex-grow">
+        <Outlet /> {/* This renders your ProductDetail or other pages */}
+      </main>
+      <Footer />
+    </div>
     </>
   )
 }

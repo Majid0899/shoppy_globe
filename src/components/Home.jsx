@@ -3,6 +3,7 @@ import React from 'react'
 import heroImage from '../images/heroImage.jpg';
 import { Link } from 'react-router-dom';
 import useFetch from '../utils/useFetch';
+import Spinner from './Spinner';
 const Home = () => {
   const { data, loading } = useFetch("https://dummyjson.com/products");
   return (
@@ -23,17 +24,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto">
           <h3 className="text-3xl font-semibold mb-10 text-center">Featured Products</h3>
           {loading ?
-            (<div className="flex items-center min-h-screen  justify-center space-x-2 text-blue-600">
-
-              <svg className="w-5 h-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <circle className="opacity-25" cxr="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor"
-                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-              </svg>
-
-              <span className="text-4xl font-medium">Loading...</span>
-            </div>) :
+            <Spinner/> :
             (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {/* <!-- Product Card --> */}
               {data.slice(0, 6).map((product) => (

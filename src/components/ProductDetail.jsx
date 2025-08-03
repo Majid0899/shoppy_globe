@@ -1,36 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useFetch from '../utils/useFetch'
 import { useDispatch } from 'react-redux';
 import { addItem } from '../redux/cartSlice';
+import Spinner from './Spinner';
 
 const ProductDetail = () => {
   const { data, loading } = useFetch("https://dummyjson.com/products");
+  /*extract the id from url*/
   const { id } = useParams()
+  /*Find the product on the basis of id */
   const product = data.find((item) => item.id === parseInt(id));
   const dispatch = useDispatch()
 
+  /* Handle Add Prouct to item cart */
   const handleAddProduct = (id) => {
     const product = data.find((item) => item.id === id)
     dispatch(addItem(product))
   }
-
+ 
 
   return (
+
     <>
+      <div className="container mx-auto px-4 py-6">
+        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          Products
+        </h1>
+      </div>
+
       {loading ? (
-        <div className="flex items-center min-h-screen  justify-center space-x-2 text-blue-600">
-
-          <svg className="w-5 h-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24" stroke="currentColor">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path className="opacity-75" fill="currentColor"
-              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-          </svg>
-
-          <span className="text-4xl font-medium">Loading...</span>
-        </div>) : (
-        <div className="bg-gradient-to-br my-2 md:mt-4  mx-4 shadow-blue-500 border-blue-500 rounded shadow-md  transition duration-300 p-4 flex flex-col ">
+       <Spinner />) : (
+        <div className="bg-gradient-to-br my-2 border-2 md:mt-4 md:space-y-5 mx-4 shadow-blue-500 border-blue-500 rounded shadow-md  transition duration-300 p-4 flex flex-col ">
           {/* Product Image */}
           <img
             src={product.images[0]}
@@ -92,6 +93,7 @@ const ProductDetail = () => {
         </div>
 
       )}
+
 
 
     </>

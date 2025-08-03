@@ -4,6 +4,7 @@ import useFetch from '../utils/useFetch';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../redux/cartSlice';
 import { Link } from 'react-router-dom';
+import Spinner from './Spinner';
 
 const ProductList = () => {
   const [SearchText, setSearchText] = useState("")
@@ -55,6 +56,7 @@ const ProductList = () => {
 
   return (
     <>
+    
       <div className="container mx-auto px-4 py-6">
         <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
           Our Products
@@ -74,20 +76,7 @@ const ProductList = () => {
         </div>
       </div>
       {error && <p className="flex justify-center items-center text-red-500 text-sm mt-4">{error}</p>}
-      {loading ? (
-        <div className="flex items-center min-h-screen  justify-center space-x-2 text-blue-600">
-
-          <svg className="w-5 h-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24" stroke="currentColor">
-            <circle className="opacity-25" cxr="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path className="opacity-75" fill="currentColor"
-              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-          </svg>
-
-          <span className="text-4xl font-medium">Loading...</span>
-        </div>
-
-      )
+      {loading ? <Spinner />
         : Error ? (<div className="flex flex-col mt-2 justify-center items-center">
           <div className="bg-blue-100 text-red-500 px-4 py-2 rounded-full">{Error}</div>
           <button
