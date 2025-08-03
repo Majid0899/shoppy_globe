@@ -1,10 +1,18 @@
-import { StrictMode } from 'react'
+import { lazy, StrictMode,Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import {Spinner} from './components'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
-import {NotFound,Home, ProductList, ProductDetail, Cart} from './components'
-import Checkout from './components/Checkout.jsx'
+import Home from './pages/Home.jsx'
+import NotFound from './pages/NotFound.jsx'
+
+
+
+const ProductList=lazy(()=>import('./pages/ProductList.jsx'))
+const ProductDetail=lazy(()=>import('./pages/ProductDetail.jsx'))
+const Checkout=lazy(()=>import("./pages/Checkout.jsx"))
+const Cart=lazy(()=>import("./pages/Cart.jsx"))
 
 
 const router=createBrowserRouter([
@@ -19,18 +27,26 @@ const router=createBrowserRouter([
       },
       {
         path:"/products",
-        element:<ProductList/>
+        element:<Suspense fallback={<Spinner />}>
+          <ProductList/>
+        </Suspense>
       },
       {
         path:"/product/:id",
-        element:<ProductDetail />
+        element:<Suspense fallback={<Spinner />}>
+          <ProductDetail/>
+        </Suspense>
       },
       {
         path:"/cartitems",
-        element:<Cart/>
+        element:<Suspense fallback={<Spinner />}>
+          <Cart/>
+        </Suspense>
       },{
         path:"/checkout",
-        element:<Checkout/>
+        element:<Suspense fallback={<Spinner />}>
+          <Checkout/>
+        </Suspense>
       }
     ]
   }

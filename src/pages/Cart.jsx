@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import CartItem from './CartItem'
+import {CartItem} from '../components'
 import {Link} from 'react-router-dom'
 
 const Cart = () => {
@@ -16,7 +16,7 @@ const Cart = () => {
     </div>
     {products.length>0 ?
     (<>
-      /*Cart items */
+      { /*Cart items */ }
     <div className="grid grid-cols-1 my-2 mx-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {products.map((item) => (
             <CartItem key={item.id} product={item}/>
@@ -26,7 +26,7 @@ const Cart = () => {
           <div className="flex justify-center mt-6">
             <Link
               to="/checkout"
-              className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition"
+              className="px-6 py-3 my-2 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition"
             >
               Proceed to Checkout
             </Link>

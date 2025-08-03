@@ -3,7 +3,8 @@ import React from 'react'
 import heroImage from '../images/heroImage.jpg';
 import { Link } from 'react-router-dom';
 import useFetch from '../utils/useFetch';
-import Spinner from './Spinner';
+import { Spinner } from '../components';
+
 const Home = () => {
   const { data, loading } = useFetch("https://dummyjson.com/products");
   return (

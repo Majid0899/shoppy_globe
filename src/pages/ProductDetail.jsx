@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom'
 import useFetch from '../utils/useFetch'
 import { useDispatch } from 'react-redux';
 import { addItem } from '../redux/cartSlice';
-import Spinner from './Spinner';
+import Spinner from '../components/Spinner';
 
 const ProductDetail = () => {
+  
   const { data, loading } = useFetch("https://dummyjson.com/products");
   /*extract the id from url*/
   const { id } = useParams()

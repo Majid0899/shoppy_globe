@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import ProductItem from './ProductItem'
+
 import useFetch from '../utils/useFetch';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../redux/cartSlice';
 import { Link } from 'react-router-dom';
-import Spinner from './Spinner';
+import {Spinner,ProductItem} from '../components';
 
 const ProductList = () => {
+
+  
   const [SearchText, setSearchText] = useState("")
   const [filterItems, setfilterItems] = useState([]);
   const [Error, setError] = useState(null);
